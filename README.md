@@ -53,20 +53,19 @@ Logging Terminal Commands along with it's date time and virtual environment if p
 2. Source the Script from `~/.zshrc`:
    Add the following line to your `~/.zshrc` to include the logging logic:
 
-   source ~/.zsh_logging
+       source ~/.zsh_logging
 
 
 3. Reload Your Shell Configuration:**
    Reload your `~/.zshrc` so the changes take effect:
   
-   source ~/.zshrc
+       source ~/.zshrc
 
 
 4. Test the Setup:
    - Run some commands in your terminal, like `ls` or `python --version`.
    - Check the `Command.txt` log file in your home directory:
-   - 
-     cat ~/Command.txt
+   - cat ~/Command.txt
 
 ---
 
