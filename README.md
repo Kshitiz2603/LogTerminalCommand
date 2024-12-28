@@ -9,41 +9,43 @@ Logging Terminal Commands along with it's date time and virtual environment if p
      nano ~/.zsh_logging
 
    - Add the logging logic:
-
-     LOG_FILE=~/Command.txt
-  
-     log_command() {
      
-         # Get the full path of the command using which
-         local command_path
-         command_path=$(which "$1" 2>/dev/null)
+         # Path to the log file
+         LOG_FILE=~/Command.txt
      
-         # If the command is not found, skip logging
-         if [ -z "$command_path" ]; then
-             return
-         fi
-         # Get the current date and time
-         local date_time
-         date_time=$(date "+%Y-%m-%d %H:%M:%S")
-         # Check for an active virtual environment
-         local venv_name
-         if [[ -n "$VIRTUAL_ENV" ]]; then
-             venv_name=$(basename "$VIRTUAL_ENV")
-         else
-             venv_name="No virtual environment"
-         fi
-         # Log the information
-         {
-             echo "Command: $command_path"
-             echo "Date/Time: $date_time"
-             echo "Virtual Environment: $venv_name"
-             echo "-----------------------------------"
-         } >> "$LOG_FILE"
-     }
+         # Function to log commands
+         log_command() {
+            # Get the full path of the command using which
+            local command_path
+            command_path=$(which "$1" 2>/dev/null)
+        
+            # If the command is not found, skip logging
+            if [ -z "$command_path" ]; then
+                return
+            fi
+            # Get the current date and time
+            local date_time
+            date_time=$(date "+%Y-%m-%d %H:%M:%S")
+            # Check for an active virtual environment
+            local venv_name
+            if [[ -n "$VIRTUAL_ENV" ]]; then
+                venv_name=$(basename "$VIRTUAL_ENV")
+            else
+                venv_name="No virtual environment"
+            fi
+            # Log the information
+            {
+                echo "Command: $command_path"
+                echo "Date/Time: $date_time"
+                echo "Virtual Environment: $venv_name"
+                echo "-----------------------------------"
+            } >> "$LOG_FILE"
+         }
      
-     preexec() {
-         log_command "$1"
-     }
+         # Hook to log before each command execution
+         preexec() {
+           log_command "$1"
+         }
      
 
    - Save and close the file.
