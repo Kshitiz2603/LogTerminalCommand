@@ -15,19 +15,16 @@ Logging Terminal Commands along with it's date time and virtual environment if p
 
      # Function to log commands
      log_command() {
-         # Get the full path of the command using `which`
+         # Get the full path of the command using which
          local command_path
          command_path=$(which "$1" 2>/dev/null)
-
          # If the command is not found, skip logging
          if [ -z "$command_path" ]; then
              return
          fi
-
          # Get the current date and time
          local date_time
          date_time=$(date "+%Y-%m-%d %H:%M:%S")
-
          # Check for an active virtual environment
          local venv_name
          if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -35,7 +32,6 @@ Logging Terminal Commands along with it's date time and virtual environment if p
          else
              venv_name="No virtual environment"
          fi
-
          # Log the information
          {
              echo "Command: $command_path"
