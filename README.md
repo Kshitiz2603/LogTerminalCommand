@@ -10,14 +10,14 @@ Logging Terminal Commands along with it's date time and virtual environment if p
 
    - Add the logging logic:
 
-     # Path to the log file
      LOG_FILE=~/Command.txt
-
-     # Function to log commands
+  
      log_command() {
+     
          # Get the full path of the command using which
          local command_path
          command_path=$(which "$1" 2>/dev/null)
+     
          # If the command is not found, skip logging
          if [ -z "$command_path" ]; then
              return
@@ -40,8 +40,7 @@ Logging Terminal Commands along with it's date time and virtual environment if p
              echo "-----------------------------------"
          } >> "$LOG_FILE"
      }
-
-     # Hook to log before each command execution
+     
      preexec() {
          log_command "$1"
      }
